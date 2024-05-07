@@ -3,10 +3,10 @@ import SearchBox from "../search-box/SearchBox.jsx";
 import ContactList from "../contact-list/ContactList.jsx";
 
 import { useEffect } from "react";
-import { fetchContactsThunk } from "../../redux/contactsOps";
+import { fetchContactsThunk } from "../../redux/contacts/operations.js";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../loader/Loader.jsx";
-import { selectContacts } from "../../redux/contactsSlice.js";
+import { selectContacts } from "../../redux/contacts/selectors.js";
 import ErrorMessage from "../errorMessage/ErrorMessage.jsx";
 
 const App = () => {
