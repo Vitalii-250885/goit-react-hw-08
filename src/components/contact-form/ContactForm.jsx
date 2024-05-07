@@ -1,11 +1,11 @@
 import { useId } from "react";
 import { useDispatch } from "react-redux";
-import { addContactThunk } from "../../redux/contacts/operations";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 import css from "./ContactForm.module.css";
+import { addContactThunk } from "../../redux/contactsOps";
 
 const FormSchema = Yup.object().shape({
   name: Yup.string()
@@ -36,44 +36,41 @@ const ContactForm = () => {
   };
 
   return (
-    <>
-      <h1>Phonebook</h1>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={handleAddContact}
-        validationSchema={FormSchema}>
-        <Form className={css.form}>
-          <div>
-            <label htmlFor={nameFieldId}>Name</label>
-            <Field
-              type="text"
-              name="name"
-              id={nameFieldId}
-              className={css.input}
-            />
-            <ErrorMessage name="name">
-              {(msg) => <span className={css["error-message"]}>{msg}</span>}
-            </ErrorMessage>
-          </div>
-          <div>
-            <label htmlFor={numberFieldId}>Number</label>
-            <Field
-              type="text"
-              name="number"
-              id={numberFieldId}
-              className={css.input}
-            />
-            <ErrorMessage name="number">
-              {(msg) => <span className={css["error-message"]}>{msg}</span>}
-            </ErrorMessage>
-          </div>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleAddContact}
+      validationSchema={FormSchema}>
+      <Form className={css.form}>
+        <div>
+          <label htmlFor={nameFieldId}>Name</label>
+          <Field
+            type="text"
+            name="name"
+            id={nameFieldId}
+            className={css.input}
+          />
+          <ErrorMessage name="name">
+            {(msg) => <span className={css["error-message"]}>{msg}</span>}
+          </ErrorMessage>
+        </div>
+        <div>
+          <label htmlFor={numberFieldId}>Number</label>
+          <Field
+            type="text"
+            name="number"
+            id={numberFieldId}
+            className={css.input}
+          />
+          <ErrorMessage name="number">
+            {(msg) => <span className={css["error-message"]}>{msg}</span>}
+          </ErrorMessage>
+        </div>
 
-          <button type="submit" className={css.button}>
-            Add contact
-          </button>
-        </Form>
-      </Formik>
-    </>
+        <button type="submit" className={css.button}>
+          Add contact
+        </button>
+      </Form>
+    </Formik>
   );
 };
 

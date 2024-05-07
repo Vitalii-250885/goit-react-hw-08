@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
-import { BsPersonFill, BsFillTelephoneFill } from "react-icons/bs";
-import { deleteContactThunk } from "../../redux/contacts/operations";
-
 import css from "./Contact.module.css";
+
+import { BsPersonFill, BsFillTelephoneFill } from "react-icons/bs";
+import { deleteContactThunk } from "../../redux/contactsOps";
 
 const Contact = ({ name, number, id }) => {
   const dispatch = useDispatch();
