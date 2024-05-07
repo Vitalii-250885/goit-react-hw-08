@@ -1,7 +1,9 @@
 import { useEffect } from "react";
-import { fetchContactsThunk } from "../../redux/contacts/operations.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
+
+import { selectIsRefreshing } from "../../redux/auth/selectors.js";
+import { refreshUser } from "../../redux/auth/operations.js";
 
 import HomePage from "../../pages/homePage/HomePage.jsx";
 import ContactsPage from "../../pages/contactsPage/ContactsPage.jsx";
@@ -13,12 +15,15 @@ import { RestrictedRoute } from "../RestrictedRoute.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
+  const { isRefreshing } = useSelector(selectIsRefreshing);
 
   useEffect(() => {
-    dispatch(fetchContactsThunk());
+    dispatch(refreshUser());
   }, [dispatch]);
 
-  return (
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
     <>
       <Layout>
         <Routes>
