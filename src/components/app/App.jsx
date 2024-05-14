@@ -1,21 +1,33 @@
-import { Route, Routes } from "react-router-dom";
+import ContactForm from "../contact-form/ContactForm.jsx";
+import SearchBox from "../search-box/SearchBox.jsx";
+import ContactList from "../contact-list/ContactList.jsx";
 
-import { Layout } from "../Layout";
-import ContactsPage from "../../pages/contactsPage/ContactsPage";
-import HomePage from "../../pages/homePage/HomePage";
-import LoginPage from "../../pages/loginPage/LoginPage";
-import RegisterPage from "../../pages/registerPage/RegisterPage";
+import { useEffect } from "react";
+import { fetchContactsThunk } from "../../redux/contactsOps";
+import { useDispatch, useSelector } from "react-redux";
+import Loader from "../loader/Loader.jsx";
+import { selectContacts } from "../../redux/contactsSlice.js";
+import ErrorMessage from "../errorMessage/ErrorMessage.jsx";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  const { loading, error } = useSelector(selectContacts);
+
+  useEffect(() => {
+    dispatch(fetchContactsThunk());
+  }, [dispatch]);
+
   return (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/contacts" element={<ContactsPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-      </Routes>
-    </Layout>
+    <>
+      <h1>Phonebook</h1>
+      <ContactForm />
+      <SearchBox />
+
+      {loading && <Loader />}
+      {error && <ErrorMessage text={error} />}
+      <ContactList />
+    </>
   );
 };
 
