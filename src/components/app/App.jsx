@@ -1,12 +1,13 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { fetchContactsThunk } from "../../redux/contacts/operations.js";
+import { selectContacts } from "../../redux/contacts/slice.js";
+
 import ContactForm from "../contact-form/ContactForm.jsx";
 import SearchBox from "../search-box/SearchBox.jsx";
 import ContactList from "../contact-list/ContactList.jsx";
-
-import { useEffect } from "react";
-import { fetchContactsThunk } from "../../redux/contactsOps";
-import { useDispatch, useSelector } from "react-redux";
 import Loader from "../loader/Loader.jsx";
-import { selectContacts } from "../../redux/contactsSlice.js";
 import ErrorMessage from "../errorMessage/ErrorMessage.jsx";
 
 const App = () => {
