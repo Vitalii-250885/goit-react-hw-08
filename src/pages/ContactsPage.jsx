@@ -9,9 +9,7 @@ import ContactList from "../components/contact-list/ContactList";
 import ErrorMessage from "../components/errorMessage/ErrorMessage";
 import Loader from "../components/loader/Loader";
 import { fetchContactsThunk } from "../redux/contacts/operations";
-import { selectContacts } from "../redux/contacts/slice";
-// import { fetchTasks } from '../../redux/tasks/operations';
-// import { selectLoading } from '../../redux/tasks/selectors';
+import { selectContacts } from "../redux/contacts/selectors";
 
 export default function ContactsPage() {
   const dispatch = useDispatch();
@@ -21,12 +19,6 @@ export default function ContactsPage() {
   useEffect(() => {
     dispatch(fetchContactsThunk());
   }, [dispatch]);
-  //   const dispatch = useDispatch();
-  //   const isLoading = useSelector(selectLoading);
-
-  //   useEffect(() => {
-  //     dispatch(fetchTasks());
-  //   }, [dispatch]);
 
   return (
     <>
