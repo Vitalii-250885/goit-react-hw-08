@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 import DocumentTitle from "../components/DocumentTitle";
 
-import ContactForm from "../components/contact-form/ContactForm";
+import { ContactForm } from "../components/contact-form/ContactForm";
 import SearchBox from "../components/search-box/SearchBox";
 import ContactList from "../components/contact-list/ContactList";
 import ErrorMessage from "../components/errorMessage/ErrorMessage";
 import Loader from "../components/loader/Loader";
-import { fetchContactsThunk } from "../redux/contacts/operations";
+import { fetchContacts } from "../redux/contacts/operations";
 import { selectContacts } from "../redux/contacts/selectors";
 
 export default function ContactsPage() {
@@ -17,7 +17,7 @@ export default function ContactsPage() {
   const { loading, error } = useSelector(selectContacts);
 
   useEffect(() => {
-    dispatch(fetchContactsThunk());
+    dispatch(fetchContacts());
   }, [dispatch]);
 
   return (
