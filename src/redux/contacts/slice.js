@@ -4,6 +4,7 @@ import {
   fetchContactsThunk,
   deleteContactThunk,
 } from "./operations";
+import { logOut } from "../auth/operations";
 
 const initialState = {
   items: [],
@@ -35,6 +36,12 @@ export const contactsSlice = createSlice({
       .addCase(addContactThunk.fulfilled, (state, action) => {
         state.loading = false;
         state.items = action.payload;
+      })
+
+      .addCase(logOut.fulfilled, (state) => {
+        state.items = [];
+        state.error = null;
+        state.loading = false;
       })
 
       .addMatcher(isPanding, (state) => {
